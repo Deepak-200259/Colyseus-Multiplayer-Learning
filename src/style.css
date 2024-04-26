@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+html,
+body {
+	overflow: hidden;
+}
+
+.webgl {
+	position: fixed;
+	top: 0;
+	left: 0;
+	outline: none;
+	z-index: 0;
+}
+
+.ezy__signin15 {
+	width: 100vw;
+	height: 100vh;
+}
+
+.room-form {
+	position: absolute;
+	z-index: 1;
+}
+
+#room-name,
+#player-name {
+	color: black !important;
+}

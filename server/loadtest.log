@@ -1,0 +1,12 @@
+[25/4/2024, 1:32:58 am] @colyseus/loadtest
+endpoint: ws://localhost:2567
+roomName: my_room
+numClients: 2
+logLevel: all
+output: E:\ThreeJSProjects\Colyseus-Multiplayer-Learning\server\loadtest.log
+[25/4/2024, 1:32:58 am] ServerError: connect ECONNREFUSED ::1:2567
+[25/4/2024, 1:32:58 am] ServerError: connect ECONNREFUSED ::1:2567
+[25/4/2024, 1:36:16 am] Finished. Summary:
+    Successful connections: 0
+    Failed connections: 2
+    Total errors: 2
