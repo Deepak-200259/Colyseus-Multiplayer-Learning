@@ -5,10 +5,14 @@ import Sizes from "./Utils/Sizes.js";
 import Time from "./Utils/Time.js";
 import Camera from "./Camera.js";
 import Renderer from "./Renderer.js";
-import World from "./World/World.js";
+import SceneWorld from "./World/World.js";
 import Resources from "./Utils/Resources.js";
+import CannonDebugRenderer from "./Utils/CannonDebugRenderer.js";
+import CannonDebugger from "cannon-es-debugger";
 
-import sources from "./sources.js";
+import { Vec3, World } from "cannon-es";
+
+import { sources, characterAnimations } from "./Constants.js";
 import NetworkManager from "./Utils/NetworkManager.js";
 
 let instance = null;
@@ -20,6 +24,7 @@ export default class Experience {
 			return instance;
 		}
 		instance = this;
+
 		// Global access
 		window.experience = this;
 
@@ -33,9 +38,14 @@ export default class Experience {
 		this.time = new Time();
 		this.scene = new THREE.Scene();
 		this.resources = new Resources(sources);
+		this.characterAnimations = new Resources(characterAnimations);
 		this.camera = new Camera();
 		this.renderer = new Renderer();
-		this.world = new World();
+		this.world = new SceneWorld();
+		this.physicsWorld = new World({ gravity: new Vec3(0, -9.8, 0) });
+		this.cannonDebugger = new CannonDebugger(this.scene, this.physicsWorld);
+		this.axesHelper = new THREE.AxesHelper(2000);
+		this.scene.add(this.axesHelper);
 
 		// Resize event
 		this.sizes.on("resize", () => {
@@ -56,6 +66,8 @@ export default class Experience {
 	update() {
 		this.camera.update();
 		this.world.update();
+		this.cannonDebugger.update();
+		this.physicsWorld.step(1 / 60, this.time.delta, 3);
 		this.renderer.update();
 	}
 

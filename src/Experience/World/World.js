@@ -1,9 +1,11 @@
 import Experience from "../Experience.js";
+import Car from "./Car.js";
+import Character from "./Character.js";
+import City from "./City.js";
 import Environment from "./Environment.js";
 import Floor from "./Floor.js";
-import Fox from "./Fox.js";
 
-export default class World {
+export default class SceneWorld {
 	constructor() {
 		this.experience = new Experience();
 		this.scene = this.experience.scene;
@@ -12,19 +14,22 @@ export default class World {
 		// Wait for resources
 		this.resources.on("ready", () => {
 			// Setup
-			console.log("Resources Loaded");
-			this.floor = new Floor();
-			this.fox = new Fox();
+			// this.floor = new Floor();
+			this.city = new City();
+			this.character = new Character();
+			// this.car = new Car();
 			this.environment = new Environment();
 		});
 	}
 
-	addPlayer(playerName) {
-		console.log("call recieved");
-		this.fox.setModel(playerName);
+	addPlayer(data) {
+		this.character.setModel(data);
+		this.character.registerKeys();
 	}
 
 	update() {
-		if (this.fox) this.fox.update();
+		if (this.character) this.character.update();
+		if (this.car) this.car.update();
+		if (this.city) this.city.update();
 	}
 }

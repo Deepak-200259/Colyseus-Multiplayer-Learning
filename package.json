@@ -12,8 +12,10 @@
     "vite": "^4.3.9"
   },
   "dependencies": {
+    "cannon-es-debugger": "^1.0.0",
     "colyseus.js": "^0.15.18",
     "lil-gui": "^0.18.1",
-    "three": "^0.153.0"
+    "three": "^0.153.0",
+    "three-to-cannon": "^5.0.1"
   }
 }
